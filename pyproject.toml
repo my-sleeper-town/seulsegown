@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "seulsegown"
+version = "0.1.0"
+description = ""
+authors = ["An Nyeong <me@annyeong.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

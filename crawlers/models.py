@@ -6,7 +6,7 @@ class Category(models.Model):
     category_name = models.CharField(max_length=200)
 
     def __str__(self):
-        return f'제목: {self.category_name}'
+        return f'제목 : {self.category_name}'
 
 
 '''2. Brand(브랜드)'''

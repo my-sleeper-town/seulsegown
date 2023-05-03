@@ -67,9 +67,3 @@ def crawl_ministop():
     return jumpos_info
 
 
-
-def main():
-    Save_data(Crawling())
-
-if __name__ == "__main__":
-    main()

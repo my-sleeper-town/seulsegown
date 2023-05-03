@@ -9,7 +9,7 @@
 ## ⭐️ 프로젝트 주제
 ### 🩴 내가 사는 곳은 슬세권인가?
 
-<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png" width="700" height="800"/>
+<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png" width="600" height="850"/>
 
 <br></br>
 ## ⭐️ 프로젝트 소개
@@ -27,7 +27,7 @@
 <br>
 
 ### 3. 평가 점수 계산 방식
-![image (2)](https://user-images.githubusercontent.com/54103240/236002202-b3d74876-d61e-4b9f-883b-0c6933a3afe8.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002202-b3d74876-d61e-4b9f-883b-0c6933a3afe8.png" width="1200" height="600"/>
 
 
 

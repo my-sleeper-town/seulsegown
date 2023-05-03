@@ -68,4 +68,4 @@
 <br></br>
 
 ### 3️⃣ Flow Chart
-![스크린샷 2023-05-02 오후 1 50 47](https://user-images.githubusercontent.com/54103240/236001750-ac2e3357-cbfc-4214-9e3f-122e3717e8c7.png)
+<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236001750-ac2e3357-cbfc-4214-9e3f-122e3717e8c7.png" width="700" height="400"/>

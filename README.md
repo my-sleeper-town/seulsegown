@@ -8,8 +8,8 @@
 
 ## ⭐️ 프로젝트 주제
 ### 🩴 내가 사는 곳은 슬세권인가?
-![스크린샷 2023-05-03 16 27 24](https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png)
-
+#이미지 사이즈 조절해서 올리는 경우
+<img src="[이미지주소.png](https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png)" width="200" height="400"/>
 
 <br></br>
 ## ⭐️ 프로젝트 소개

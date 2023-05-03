@@ -6,9 +6,7 @@
 - 
 <br></br>
 
-## ⭐️ 프로젝트 주제
-### 🩴 내가 사는 곳은 슬세권인가?
-
+## ⭐️ 프로젝트 주제 : 내가 사는 곳은 슬세권🩴인가?
 <p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png" width="600" height="850"/>
 
 <br></br>
@@ -18,15 +16,15 @@
 <br>
 
 ### 2. 편의점
-1. CU
-2. emart24
-3. ministop
-4. 7eleven
-5. gs25
+**1. CU**
+**2. emart24**
+**3. ministop**
+**4. 7eleven**
+**5. gs25**
 
-<br>
+<br></br>
 
-### 3. 평가 점수 계산 방식
+## ⭐️ 평가 점수 계산 방식
 <p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002202-b3d74876-d61e-4b9f-883b-0c6933a3afe8.png" width="1200" height="600"/>
 
 

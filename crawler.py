@@ -1,16 +1,27 @@
+# 크롤링
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
+
 import django
 import os
+
+token = os.getenv('KAKAO_TOKEN')
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seulsegown.settings")
 django.setup()
 from store.models import Category, Brand, Jumpo
+
+# 위도 경도
+import requests
+from urllib.parse import urlparse
+import json
+import os
+
 
 def Crawling():
     '''
@@ -38,23 +49,37 @@ def Crawling():
     btn = driver.find_element(By.XPATH, '//*[@id="section"]/div[3]/div/div[2]/div[2]/div[1]/a')
     driver.execute_script("arguments[0].click();", btn)
 
-
-    '''3. 각 점포 정보 저장하기''' 
+    '''4. 각 점포 정보 저장하기''' 
     for i in range(1, 261):
         li_element = driver.find_element(By.XPATH, f'//*[@id="section"]/div[3]/div/div[2]/div[2]/div[1]/ul/li[{i}]')
         li_lines = li_element.text.split('\n')
         name = li_lines[0]
         address = li_lines[1]
-                            
+
+        print(address)
+        
+        lat = ''
+        lng = ''
+        latlng_address = addr_to_lat_lng(address)
+        if latlng_address is not None:
+            try:
+                lng = latlng_address[0]
+                lat = latlng_address[1]
+            except IndexError as e:
+                print(f"Error occurred while extracting latitude and longitude from address {address}: {e}")
+                pass
                     
+        print(lat, lng)
+        
         jumpos_info.append({
             'jumpo_name': name, 
             'street_address' : address, 
-            'latitude': 37.564214,
-            'longitude': 127.001699,}
+            'latitude': lat, # 위도 
+            'longitude': lng, } # 경도
             )
         
     return jumpos_info
+
 
 
 def Save_data(jumpos_info, category='편의점', brand='MINISTOP'):
@@ -73,8 +98,27 @@ def Save_data(jumpos_info, category='편의점', brand='MINISTOP'):
 
     return success, fail, True
 
+
+def addr_to_lat_lng(addr):
+    url = 'https://dapi.kakao.com/v2/local/search/address.json?query={address}'.format(address=addr)
+    headers = {"Authorization": "KakaoAK " + token}
+    
+    try:
+        response = requests.get(url, headers=headers)
+        result = json.loads(response.text)
+        match_first = result['documents'][0]['address']
+        return float(match_first['x']), float(match_first['y'])
+    
+    except (requests.exceptions.RequestException, ValueError, KeyError, IndexError) as e:
+        print(f"Error occurred: {e}")
+        pass 
+
+
+
 def main():
-    Save_data(Crawling())
+    #print(addr_to_lat_lng('서울 마포구 마포대로 12, 101-1호, 101-2호'))
+    print(Crawling())
+
 
 if __name__ == "__main__":
     main()

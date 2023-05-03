@@ -1,6 +1,5 @@
 import math
 
-
 def get_distance(lat1, lng1, lat2, lng2):
     """
     Calculate the distance between two points on the Earth's surface using the Haversine formula.

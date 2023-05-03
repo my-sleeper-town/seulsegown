@@ -10,11 +10,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
-from store.models import Jumpo, Brand
 
 URL = 'https://www.7-eleven.co.kr/'
 
-def crawl():
+def crawl_seven_eleven():
     '''
     서울에 있는 세븐일레븐 점포를 찾아 반환합니다.
     반환: (점포이름, 점포주소)의 문자열 튜플을 담은 리스트
@@ -49,8 +48,6 @@ def crawl():
         storeLayGu = Select(driver.find_element(By.ID, 'storeLayGu'))
         storeButton1 = driver.find_element(By.ID, 'storeButton1')
 
-        print(f'{option}의 편의점을 찾는 중...', end="\n")
-        
         storeLayGu.select_by_value(option)
         storeButton1.click()
 
@@ -60,14 +57,16 @@ def crawl():
         sleep(10)
         jumpo_links = driver.find_elements(By.XPATH, '//div[@class="list_stroe"]/ul/li/a')
 
-        count = 0
         for jumpo in jumpo_links:
             WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, '//div[@class="list_stroe"]/ul/li/a/span')))
             jumpo_name = jumpo.find_element(By.XPATH, './span[1]').text.strip()
             address = jumpo.find_element(By.XPATH, './span[2]').text.strip()
-            jumpos.append((jumpo_name, address))
-            count += 1
-        print(f'{count}개의 편의점을 찾았습니다', end="\n")
+            jumpos.append(
+                {
+                    "jumpo_name": jumpo_name,
+                    "address": address
+                }
+            )
  
     driver.quit()
     return jumpos

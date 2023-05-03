@@ -43,33 +43,27 @@ def crawl_ministop():
         address = li_lines[1]
 
         print(address)
-        
+
+        # 위도 경도 가져오는 부분 
         lat = ''
-        lon = ''
-        latlon_address = addr_to_lat_lon(address)
-        if latlon_address is not None:
+        lng = ''
+        latlng_address = addr_to_lat_lng(address)
+        if latlng_address is not None:
             try:
-                lon = latlon_address[0]
-                lat = latlon_address[1]
+                lng = latlng_address[0]
+                lat = latlng_address[1]
             except IndexError as e:
                 print(f"Error occurred while extracting latitude and longitude from address {address}: {e}")
                 pass
                     
-        print(lat, lon)
+        print(lat, lng)
         
         jumpos_info.append({
             'jumpo_name': name, 
             'street_address' : address, 
             'latitude': lat, # 위도 
-            'longitude': lon, } # 경도
+            'longitude': lng, } # 경도
             )
         
     return jumpos_info
 
-
-
-def main():
-    Save_data(Crawling())
-
-if __name__ == "__main__":
-    main()

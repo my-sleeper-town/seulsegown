@@ -1,10 +1,6 @@
 # seulsegown
 
-## ⭐️ resources
 
-- a illustration clip by [Loose Drawing](https://loosedrawing.com/terms/)
-- 
-<br></br>
 
 ## ⭐️ 프로젝트 주제 : 내가 사는 곳은 슬세권🩴인가?
 <p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png" width="600" height="850"/>
@@ -55,6 +51,12 @@
 |서대원|크롤러, 백엔드|
 |안수빈|크롤러, 프론트|
 |이수영|크롤러, 백엔드|
+
+<br></br>
+
+## ⭐️ resources
+
+- a illustration clip by [Loose Drawing](https://loosedrawing.com/terms/)
 
 <br></br>
 

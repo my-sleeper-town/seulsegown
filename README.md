@@ -60,7 +60,7 @@
 
 ## 프로젝트 진행 과정
 ### 1️⃣ 프로제젝트 구조
-<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236000654-a85dc143-3507-40e2-94ba-184b5e8d929d.png" width="600" height="800"/>
+<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236000654-a85dc143-3507-40e2-94ba-184b5e8d929d.png" width="800" height="600"/>
 <br></br>
 
 ### 2️⃣ 데이터 모델링

@@ -6,12 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import Select
 import django
 import os
-from ..seulsegown import *
 
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seulsegown.settings")
-django.setup()
-from store.models import Category, Brand, Jumpo
 
 def crawl_ministop():
     '''
@@ -58,24 +53,3 @@ def crawl_ministop():
     return jumpos_info
 
 
-def Save_data(jumpos_info, category='편의점', brand='MINISTOP'):
-    category = Category.objects.get_or_create(category_name=category)[0]
-    brand = Brand.objects.get_or_create(category=category, brand_name=brand)[0]
-    success = fail = 0
-
-    for jumpo in jumpos_info:
-        try:
-            Jumpo.objects.create(brand=brand, **jumpo)
-            success += 1
-        except django.db.utils.IntegrityError:
-            print(f'>>> 이미 저장된 데이터({jumpo["jumpo_name"]})가 있습니다.')
-            fail += 1
-            pass
-
-    return success, fail, True
-
-def main():
-    Save_data(crawl_ministop())
-
-if __name__ == "__main__":
-    main()

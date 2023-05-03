@@ -64,7 +64,7 @@ def crawl_seven_eleven():
             jumpos.append(
                 {
                     "jumpo_name": jumpo_name,
-                    "address": address
+                    "street_address": address
                 }
             )
  

@@ -16,11 +16,11 @@
 <br>
 
 ### 2. 편의점
-- 1. CU
-- 2. emart24
-- 3. ministop
-- 4. 7eleven
-- 5. gs25
+- CU
+- emart24
+- ministop
+- 7eleven
+- gs25
 
 <br></br>
 
@@ -60,8 +60,7 @@
 
 ## 프로젝트 진행 과정
 ### 1️⃣ 프로제젝트 구조
-![image (1)](https://user-images.githubusercontent.com/54103240/236000654-a85dc143-3507-40e2-94ba-184b5e8d929d.png)
-
+<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236000654-a85dc143-3507-40e2-94ba-184b5e8d929d.png" width="1000" height="600"/>
 <br></br>
 
 ### 2️⃣ 데이터 모델링

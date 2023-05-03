@@ -20,9 +20,10 @@
 ## ⭐️ 프로젝트 규칙 및 주의사항
 ### 1. API 토큰 추가
 - 주소를 경도, 위도 값으로 변환 위한 함수에서 요구됨
-- KAKAO API 이용
-- 환경변수 KAKAO_TOKEN에 API 토큰을 추가
-- 터미널에서 expert 사용
+- kakao api 키를 저장소에 올리면 안됨(보안상)
+- 터미널에 expert를 이용해 환경변수에 키를 따로 저장
+- token = os.getenv('변수 이름')으로 활용 가능 
+- addr_to_lat_lng(addr) 함수(위도경도 변환 함수) 안의 token에 할당됨
 
 ### 2. 커밋 컨벤션
 

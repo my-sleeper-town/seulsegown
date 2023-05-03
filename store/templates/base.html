@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>우리집은 슬세권일까</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'style.css' %}?{% now 'U' %}" type="text/css"/>
+        {% block style %}
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

@@ -64,8 +64,7 @@
 <br></br>
 
 ### 2️⃣ 데이터 모델링
-![image](https://user-images.githubusercontent.com/54103240/236000480-36b2d7eb-e0c2-4eb4-bf8b-2f5aa1a9afcf.png)
-
+<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236000480-36b2d7eb-e0c2-4eb4-bf8b-2f5aa1a9afcf.png" width="700" height="400"/>
 <br></br>
 
 ### 3️⃣ Flow Chart

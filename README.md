@@ -9,15 +9,6 @@
 ## ⭐️ 프로젝트 소개
 ### 1. 내용
 
-<br>
-
-### 2. 편의점
-- CU
-- emart24
-- ministop
-- 7eleven
-- gs25
-
 <br></br>
 
 

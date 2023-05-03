@@ -1,6 +1,5 @@
-from django.urls import path, include
+from django.urls import path
 from store.views import index, result
-
 
 urlpatterns = [
     path('', index, name='index'),

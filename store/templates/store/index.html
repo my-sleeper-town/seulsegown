@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>슬세권-메인페이지</title>
-</head>
-<body>
-<form action="{% url 'result' %}" method="get">
-    <label for="search_address">주소: </label>
-    <input id="search_address" type="text" name="address" value="">
-    <input type="submit" value="검색">
-</form>
+{% extends 'base.html' %}
 
-
-</body>
-</html>
+{% block content %}
+<div class="index">
+    <header>
+        <h1>우리집은 슬세권일까?</h1>
+        <p>
+            우리집에서 슬리퍼를 신고 갈 수 있는 편의점은 몇 개나 있을까요?
+        </p>
+    </header>
+    <main>
+        <form action="{% url 'result' %}" method="get" class="search-field">
+            <input name="address" placeholder="우리집 주소 입력하기" type="text" />
+            <button type="submit">검색</button>
+        </form>
+    </main>
+    <section>
+        {% load static %}
+        <img class="konbini" src="{% static 'images/konbini.png' %}"/>
+    </section>
+</div>
+{% endblock %}

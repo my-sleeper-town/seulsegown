@@ -9,7 +9,7 @@
 ## ⭐️ 프로젝트 주제
 ### 🩴 내가 사는 곳은 슬세권인가?
 
-<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png" width="500" height="800"/>
+<p align="center"><img src="https://user-images.githubusercontent.com/54103240/236002002-13ca2ac0-cb85-4467-812d-1f8f3350f6cd.png" width="700" height="800"/>
 
 <br></br>
 ## ⭐️ 프로젝트 소개

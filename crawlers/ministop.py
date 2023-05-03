@@ -43,7 +43,8 @@ def crawl_ministop():
         address = li_lines[1]
 
         print(address)
-        
+
+        # 위도 경도 가져오는 부분 
         lat = ''
         lng = ''
         latlng_address = addr_to_lat_lng(address)
@@ -66,10 +67,3 @@ def crawl_ministop():
         
     return jumpos_info
 
-
-
-def main():
-    Save_data(Crawling())
-
-if __name__ == "__main__":
-    main()

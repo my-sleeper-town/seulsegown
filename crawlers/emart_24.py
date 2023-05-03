@@ -1,6 +1,6 @@
 """
 Retrieves the address and jumpo name of emart 24 stores in Seoul from emart24.co.kr.
-@returns - a list of pairs of (jumpo_name, street_address)
+@returns - a list of dictionary of (jumpo_name, street_address)
 """
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -10,7 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 import time
 
-def crawl():
+def crawl_emart_24():
     driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
     driver.get("https://www.emart24.co.kr/store")
     driver.implicitly_wait(0.5)
@@ -44,7 +44,12 @@ def crawl():
             time.sleep(1)
 
             for street_address, jumpo_name in zip(address_list, jumpoName_list):
-                loc_list.append((jumpo_name.text, street_address.text))
+                loc_list.append(
+                            {
+                                'jumpo_name':jumpo_name.text,
+                                'street_address':street_address.text
+                            }
+                            )
             ActionChains(driver).click(nextBtn).perform()
             time.sleep(1)
 

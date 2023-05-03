@@ -1,6 +1,8 @@
-from django.urls import path
-from store.views import index
+from django.urls import path, include
+from store.views import index, result
+
 
 urlpatterns = [
-    path('', index)
+    path('', index, name='index'),
+    path('result/', result, name='result'),
 ]

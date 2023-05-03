@@ -2,15 +2,13 @@ from collections import defaultdict
 from bs4 import BeautifulSoup
 import django
 import requests
-import os, time
+import os
+import time
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "seulsegown.settings")
-django.setup()
-from store.models import Category, Brand, Jumpo
 
 """
 CU 편의점 목록과 주소를 가져오기 위한 함수들입니다.
-CU 웹사이트는 특정 파라미터(DATA)로 POST 요청을 보내는 방식으로 동작하고 있습니다.
+CU 웹사이트는 시도명, 군구, 읍명동 등 특정 파라미터(DATA)로 POST 요청을 보내는 방식으로 동작하고 있습니다.
 따라서, DATA를 전역 딕셔너리 변수로 선언하여 각 함수마다 필요한 파라미터를 변환하여 사용하고 있습니다.
 
 작성자 : 서대원
@@ -133,14 +131,13 @@ def get_jumpo_info(gu, dong):
     DATA['jumpodong'] = dong
     DATA['pageIndex'] = 1
     total_store_info = []
-    print(f'>>> {gu} {dong} 스크래핑을 시작합니다.')
     while True:
         req = post_request(URLS['jumpo'], data=DATA, headers=HEADERS)
         soup = BeautifulSoup(req.text, 'html.parser')
         stores = soup.select(
             '#result_search > div.result_store > div.detail_store > table > tbody > tr')
         if stores[0].find('td').text == '등록된 게시물이 없습니다.':
-            print('>>> 점포가 없으므로 스크래핑하지 않습니다.')
+            pass
         else:
             for store in stores:
                 total_store_info.append({
@@ -152,67 +149,32 @@ def get_jumpo_info(gu, dong):
 
         if soup.select('#paging > a') and soup.select('#paging > a')[-1].text != '이전':
             DATA['pageIndex'] += 1
-            print('>>> 다음 페이지로 이동합니다.')
         else:
-            print('>>> 다음 페이지가 없으므로 종료합니다.')
             break
 
     return total_store_info
 
 
-def save_data(jumpo_list, category='편의점', brand='CU'):
-    """
-    점포 목록(jumpo_list)과 업종명(category), 브랜드명(brand)을 인자로 받아 데이터를 DB에 저장하는 함수입니다.
-    * category와 brand 인자는 각각 '편의점'과 'CU'를 기본값으로 가집니다.
-
-    Args:
-        jumpo_list (list(dictionary)) : 스크래핑 한 점포 목록들
-        category (str) : 업종명 예)편의점
-        brand (str) : 브랜드명 예CU
-
-    Returns:
-        success (int) : DB에 성공적으로 저장한 점포의 개수
-        fail (int) : DB에 저장 실패한 점포의 개수
-        True (bool) : 저장 과정에서 오류가 발생했는지를 검증하는 불리언 값
-    """
-    category = Category.objects.get_or_create(category_name=category)[0]
-    brand = Brand.objects.get_or_create(category=category, brand_name=brand)[0]
-    success = fail = 0
-
-    for jumpo in jumpo_list:
-        try:
-            Jumpo.objects.create(brand=brand, **jumpo)
-            success += 1
-        except django.db.utils.IntegrityError:
-            print(f'>>> 이미 저장된 데이터({jumpo["jumpo_name"]})가 있습니다.')
-            fail += 1
-            pass
-
-    return success, fail, True
-
-
-def run():
+def crawl_cu():
     """
     서울특별시 전체 CU 편의점 목록을 스크래핑 하기 위해 선언한 모든 함수를 불러오는 함수
+
+    Returns:
+        jumpos_info list(dictionary)-> [{'jumpo_name': '중랑베스트점',
+                            'jumpo_street_address': '서울특별시 중랑구 봉화산로4길 28 (중화동)',
+                            'latitude': 37.564214,
+                            'longitude': 127.001699 }, ..{}.. , ]
     """
     gu_list = get_district_info('서울특별시')
     gu_dong_dict = defaultdict(list)
     for gu in gu_list:
         gu_dong_dict[gu] = get_town_info(gu)
 
-    jumpo_list = []
+    jumpos_info = []
 
     for gu, dongs in gu_dong_dict.items():
         for dong in dongs:
-            print(f'>>> {gu} {dong} 점포 데이터 스크래핑 성공')
-            jumpo_list += get_jumpo_info(gu, dong)
-            time.sleep(3)
+            jumpos_info += get_jumpo_info(gu, dong)
+            time.sleep(1)
 
-    success, fail, result = save_data(jumpo_list)
-    if result:
-        print('>>> 성공적으로 데이터를 저장했습니다.')
-        print(f'>>> 저장에 성공한 데이터 : {success}개\n 저장에 실패한 데이터 : {fail}개')
-
-
-if __name__ == "__main__":
-    run()
+    return jumpos_info

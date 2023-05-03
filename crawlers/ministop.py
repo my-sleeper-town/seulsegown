@@ -67,3 +67,4 @@ def crawl_ministop():
         
     return jumpos_info
 
+

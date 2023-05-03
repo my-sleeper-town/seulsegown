@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="index">
+    <header>
+        <h1>우리집은 슬세권일까?</h1>
+        <p>
+            우리집에서 슬리퍼를 신고 갈 수 있는 편의점은 몇 개나 있을까요?
+        </p>
+    </header>
+    <main>
+        <form action="{% url 'result' %}" method="get" class="search-field">
+            <input name="address" placeholder="우리집 주소 입력하기" type="text" />
+            <button type="submit">검색</button>
+        </form>
+    </main>
+    <section>
+        {% load static %}
+        <img class="konbini" src="{% static 'images/konbini.png' %}"/>
+    </section>
+</div>
+{% endblock %}

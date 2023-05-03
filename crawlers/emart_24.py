@@ -44,7 +44,6 @@ def crawl_emart_24():
             time.sleep(1)
 
             for street_address, jumpo_name in zip(address_list, jumpoName_list):
-
                 lat = ''
                 lon = ''
                 latlon_address = addr_to_lat_lon(street_address.text)

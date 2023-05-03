@@ -1,9 +1,10 @@
 # seulsegown
 
-## resources
+## ⭐️ resources
 
 - a illustration clip by [Loose Drawing](https://loosedrawing.com/terms/)
-
+- 
+<br></br>
 
 ## ⭐️ 프로젝트 주제
 ### 🩴 내가 사는 곳은 슬세권인가?
@@ -12,11 +13,11 @@
 
 <br></br>
 ## ⭐️ 프로젝트 소개
-### 내용
+### 1. 내용
 
 <br>
 
-### 편의점
+### 2. 편의점
 1. CU
 2. emart24
 3. ministop
@@ -25,7 +26,7 @@
 
 <br>
 
-### 평가 점수 계산 방식
+### 3. 평가 점수 계산 방식
 ![image (2)](https://user-images.githubusercontent.com/54103240/236002202-b3d74876-d61e-4b9f-883b-0c6933a3afe8.png)
 
 

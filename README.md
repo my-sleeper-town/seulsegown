@@ -16,11 +16,11 @@
 <br>
 
 ### 2. 편의점
-**1. CU
-**2. emart24
-**3. ministop
-**4. 7eleven
-**5. gs25
+- 1. CU
+- 2. emart24
+- 3. ministop
+- 4. 7eleven
+- 5. gs25
 
 <br></br>
 

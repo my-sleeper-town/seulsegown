@@ -141,8 +141,8 @@ def get_jumpo_info(gu, dong):
             pass
         else:
             for store in stores:
-                lat = 37.564214
-                lng = 127.001699
+                lat = 0
+                lng = 0
                 jumpo_name = store.find('span').text
                 street_address = store.find('address').text.strip()
                 latlng_address = addr_to_lat_lng(street_address)

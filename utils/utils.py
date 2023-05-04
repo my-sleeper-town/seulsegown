@@ -47,6 +47,6 @@ def addr_to_lat_lng(addr):
         match_first = result['documents'][0]['address']
         return float(match_first['x']), float(match_first['y'])
     
-    except (requests.exceptions.RequestException, ValueError, KeyError, IndexError) as e:
-        print(f"Error occurred: {e}")
+    except (requests.exceptions.RequestException, TypeError, ValueError, KeyError, IndexError) as e:
+        print(f"Error occurred: {e} while fetching address: {addr}")
         pass 

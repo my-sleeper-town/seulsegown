@@ -26,6 +26,16 @@ def save_crawled_jumpos(jumpos, brand):
     print("{}/{} saved. {} failed.".format(len(jumpos) - failed, len(jumpos), failed))
 
 class Command(BaseCommand):
+    '''
+    각 브랜드 별로 데이터를 크롤하여 DB에 저장하는 커스텀 manage.py 명령어를 구현합니다.
+
+    Refer:
+        https://docs.djangoproject.com/en/4.2/howto/custom-management-commands/#django.core.management.BaseCommand.handle
+
+    Usage:
+        python manage.py crawl --brand [brandname]
+        python manage.py crawl --all
+    '''
     help = 'Crawl the informations of the jumpos by brand, and save into DB.'
     valid_brands = ['cu', 'emart24', 'ministop', 'seveneleven', 'gs25']
 
@@ -34,6 +44,9 @@ class Command(BaseCommand):
         parser.add_argument("--all", action="store_true", help="crawl all brands")
     
     def handle(self, *args, **options):
+        '''
+        manage.py로 명령어를 실행할 시에 호출되는 콜백 함수입니다.
+        '''
         if options["all"] and options["brand"]:
             return False
         if options["brand"] is not None and not options["brand"] in self.valid_brands:

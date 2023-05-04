@@ -45,8 +45,8 @@ def crawl_ministop():
         print(address)
 
         # 위도 경도 가져오는 부분 
-        lat = ''
-        lng = ''
+        lat = 0
+        lng = 0
         latlng_address = addr_to_lat_lng(address)
         if latlng_address is not None:
             try:

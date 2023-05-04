@@ -45,12 +45,12 @@ def crawl_emart_24():
 
             for street_address, jumpo_name in zip(address_list, jumpoName_list):
                 lat = ''
-                lon = ''
-                latlon_address = addr_to_lat_lon(street_address.text)
-                if latlon_address is not None:
+                lng = ''
+                latlng_address = addr_to_lat_lng(street_address.text)
+                if latlng_address is not None:
                     try:
-                        lon = latlon_address[0]
-                        lat = latlon_address[1]
+                        lng = latlng_address[0]
+                        lat = latlng_address[1]
                     except IndexError as e:
                         print(f"Error occurred while extracting latitude and longitude from address {street_address.text}: {e}")
                         pass
@@ -60,7 +60,7 @@ def crawl_emart_24():
                                 'jumpo_name':jumpo_name.text,
                                 'street_address':street_address.text,
                                 'latitude': lat, # 위도 
-                                'longitude': lon  # 경도
+                                'longitude': lng  # 경도
                             }
                             )
             ActionChains(driver).click(nextBtn).perform()

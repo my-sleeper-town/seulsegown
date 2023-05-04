@@ -19,8 +19,8 @@ class Brand(models.Model):
 class Jumpo(models.Model):
     jumpo_name = models.CharField(max_length=50, verbose_name='점포명')
     street_address = models.CharField(max_length=200, verbose_name='도로명주소')
-    latitude = models.FloatField(blank=True, verbose_name='위도')
-    longitude = models.FloatField(blank=True, verbose_name='경도')
+    latitude = models.FloatField(null=True, verbose_name='위도')
+    longitude = models.FloatField(null=True, verbose_name='경도')
     brand = models.ForeignKey('Brand', on_delete=models.CASCADE)
 
     def __str__(self):

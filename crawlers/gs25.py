@@ -38,8 +38,8 @@ def crawl_gs25():
         for jumpo in jumpo_links:
             jumpo_name = jumpo.find_element(By.CLASS_NAME, 'st_name').text
             address = jumpo.find_element(By.CLASS_NAME, 'st_address').text
-            lat = ''
-            lng = ''
+            lat = 0
+            lng = 0
             latlng_address = addr_to_lat_lng(address)
             if latlng_address is not None:
                 try:

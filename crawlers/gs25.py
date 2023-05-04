@@ -25,19 +25,19 @@ def crawl_gs25():
     driver.get('http://gs25.gsretail.com/gscvs/ko/store-services/locations')
     
     ## 지역선택 combo box를 클릭 후 서울시 클릭
-    seoul_select = Select(driver.find_element(By.ID, 'stb1'))
+    seoul_select = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'stb1')))
+    seoul_select = Select(seoul_select)
     seoul_select.select_by_visible_text('서울시')
     
     ## 검색 버튼을 클릭 (검색 버틀을 누를 시 화면에 서울시 매장 정보가 나옴)
     driver.find_element(By.ID, 'searchButton').click()
-    
-    current_page = 1
-    while current_page <= 622:
-        jumpo_links = driver.find_elements(By.XPATH, '//tbody[@id="storeInfoList"]/tr')
 
+    current_page = 1
+    while current_page <= 623:
+        jumpo_links = driver.find_elements(By.XPATH, '//tbody[@id="storeInfoList"]/tr')
         for jumpo in jumpo_links:
-            jumpo_name = jumpo.find_element(By.CLASS_NAME, 'st_name').text
-            address = jumpo.find_element(By.CLASS_NAME, 'st_address').text
+            jumpo_name = WebDriverWait(jumpo, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'st_name'))).text
+            address = WebDriverWait(jumpo, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'st_address'))).text
             lat = 0
             lng = 0
             latlng_address = addr_to_lat_lng(address)
@@ -58,10 +58,10 @@ def crawl_gs25():
             )
             
         ## 다음 페이지 데이터 수집을 위해 next button 클릭
-        driver.find_element(By.CLASS_NAME, "next").click()
-        current_page +=1
         sleep(1)
-            
+        driver.find_element(By.CLASS_NAME, 'next').send_keys(Keys.ENTER)
+        current_page += 1
+        sleep(1)
     driver.quit()
 
     return jumpos

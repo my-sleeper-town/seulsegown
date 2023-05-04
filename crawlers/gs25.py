@@ -32,6 +32,7 @@ def crawl_gs25():
     
     ## 검색 버튼을 클릭 (검색 버틀을 누를 시 화면에 서울시 매장 정보가 나옴)
     driver.find_element(By.ID, 'searchButton').click()
+    sleep(5)
 
     current_page = 1
     while current_page <= 623:

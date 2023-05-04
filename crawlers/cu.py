@@ -1,5 +1,6 @@
 from collections import defaultdict
 from bs4 import BeautifulSoup
+from utils.utils import addr_to_lat_lng
 import django
 import requests
 import os
@@ -140,11 +141,24 @@ def get_jumpo_info(gu, dong):
             pass
         else:
             for store in stores:
+                lat = 37.564214
+                lng = 127.001699
+                jumpo_name = store.find('span').text
+                street_address = store.find('address').text.strip()
+                latlng_address = addr_to_lat_lng(street_address)
+                if latlng_address is not None:
+                    try:
+                        lng = latlng_address[0]
+                        lat = latlng_address[1]
+                    except IndexError as e:
+                        print(f"Error occurred while extracting latitude and longitude from address {street_address}: {e}")
+                        pass
+
                 total_store_info.append({
-                    'jumpo_name': store.find('span').text,
-                    'street_address': store.find('address').text.strip(),
-                    'latitude': 37.564214,
-                    'longitude': 127.001699,
+                    'jumpo_name': jumpo_name,
+                    'street_address': street_address,
+                    'latitude': lat,
+                    'longitude': lng,
                 })
 
         if soup.select('#paging > a') and soup.select('#paging > a')[-1].text != '이전':

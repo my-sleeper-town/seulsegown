@@ -6,5 +6,14 @@
 </head>
 <body>
     <p>입력하신 주소는 {{ address }}입니다.</p>
+    <p>현재 위치는 {{ position }}입니다.</p>
+
+    <ul>
+    {% for jumpo in jumpos %}
+    <li>
+        {{ jumpo.jumpo_name }} | {{ jumpo.distance }}m 떨어져 있습니다.
+    </li>
+    {% endfor %}
+    </ul>
 </body>
 </html>

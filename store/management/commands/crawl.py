@@ -5,6 +5,7 @@ from crawlers.emart_24 import crawl_emart_24
 from crawlers.ministop import crawl_ministop
 from crawlers.seven_eleven import crawl_seven_eleven
 from crawlers.gs25 import crawl_gs25
+import logging
 
 def save_crawled_jumpos(jumpos, brand):
     '''
@@ -14,7 +15,7 @@ def save_crawled_jumpos(jumpos, brand):
         jumpos (dict): 크롤링한 jumpo dict 리스트
         brand (store.models.Brand): Brand 객체
     '''
-    print("{} jumpo crawled for {}".format(len(jumpos), brand.brand_name))
+    logging.info("{} jumpo crawled for {}".format(len(jumpos), brand.brand_name))
     jumpos = [Jumpo(**j, brand=brand) for j in jumpos]
     failed = 0
     for jumpo in jumpos:
@@ -22,8 +23,8 @@ def save_crawled_jumpos(jumpos, brand):
             jumpo.save()
         except Exception as e:
             failed += 1
-            print(e)
-    print("{}/{} saved. {} failed.".format(len(jumpos) - failed, len(jumpos), failed))
+            logging.warning("failed with {}".format(e))
+    logging.info("{}/{} saved. {} failed.".format(len(jumpos) - failed, len(jumpos), failed))
 
 class Command(BaseCommand):
     '''
@@ -58,27 +59,27 @@ class Command(BaseCommand):
         category = Category.objects.get_or_create(category_name="편의점")[0]
         if options["brand"] == "cu" or options["all"]:
             brand = Brand.objects.get_or_create(brand_name="CU", category=category)[0]
-            print("crawling {}...".format(brand.brand_name))
+            logging.info("crawling {}...".format(brand.brand_name))
             save_crawled_jumpos(crawl_cu(), brand)
 
         if options["brand"] == "emart24" or options["all"]:
             brand = Brand.objects.get_or_create(brand_name="이마트24", category=category)[0]
-            print("crawling {}...".format(brand.brand_name))
+            logging.info("crawling {}...".format(brand.brand_name))
             save_crawled_jumpos(crawl_emart_24(), brand)
 
         if options["brand"] == "ministop" or options["all"]:
             brand = Brand.objects.get_or_create(brand_name="미니스톱", category=category)[0]
-            print("crawling {}...".format(brand.brand_name))
+            logging.info("crawling {}...".format(brand.brand_name))
             save_crawled_jumpos(crawl_ministop(), brand)
 
         if options["brand"] == "seveneleven" or options["all"]:
             brand = Brand.objects.get_or_create(brand_name="세븐일레븐", category=category)[0]
-            print("crawling {}...".format(brand.brand_name))
+            logging.info("crawling {}...".format(brand.brand_name))
             save_crawled_jumpos(crawl_seven_eleven(), brand)
         
         if options["brand"] == "gs25" or options["all"]:
             brand = Brand.objects.get_or_create(brand_name="GS25", category=category)[0]
-            print("crawling {}...".format(brand.brand_name))
+            logging.info("crawling {}...".format(brand.brand_name))
             save_crawled_jumpos(crawl_gs25(), brand)
             
-        print("Done!")
+        logging.info("Done!")

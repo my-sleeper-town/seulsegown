@@ -29,14 +29,14 @@ class Jumpo(models.Model):
 
     def in_distance(latlng, distance):
         '''
-        주어진 좌표에서 거리만큼 떨어져있는 점포를 어림잡아서 찾아서 반환합니다.
+        주어진 좌표에서 일정 거리 내의 점포를 어림잡아서 찾아서 반환합니다.
 
         Args:
             latlng (float, float): (lat, lng)로 표현된 위도경도쌍입니다.
             distance (float): 킬로미터 단위입니다.
         
         Returns:
-            주어진 좌표로부터 distance만큼 떨어져있는 jumpo의 리스트
+            주어진 좌표로부터 일정 거리 내에 있는 jumpo의 리스트
         '''
         (min_latlng, max_latlng) = get_latlng_range(latlng, distance)
         jumpos = Jumpo.objects.filter(latitude__gte=min_latlng[0], latitude__lte=max_latlng[0], longitude__gte=min_latlng[1], longitude__lte=max_latlng[1])

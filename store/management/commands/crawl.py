@@ -4,10 +4,11 @@ from crawlers.cu import crawl_cu
 from crawlers.emart_24 import crawl_emart_24
 from crawlers.ministop import crawl_ministop
 from crawlers.seven_eleven import crawl_seven_eleven
-
+from crawlers.gs25 import crawl_gs25
+ 
 class Command(BaseCommand):
     help = 'Retrieves the address and jumpo name of 7-Eleven stores in Seoul from 7-Eleven.co.kr.'
-    valid_brands = ['cu', 'emart24', 'ministop', 'seveneleven']
+    valid_brands = ['cu', 'emart24', 'ministop', 'seveneleven', 'gs25']
 
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument("--brand", type=str, help="specify a brand to crawl")
@@ -55,6 +56,15 @@ class Command(BaseCommand):
             seven_eleven_jumpos = [Jumpo(**j, brand=brand) for j in seven_eleven_jumpos]
             jumpos += seven_eleven_jumpos
             print("got {} jumpos".format(len(seven_eleven_jumpos)))
+        
+        if options["brand"] == "gs25":
+            print("crawl gs25 stores...")
+            brand = Brand.objects.get_or_create(brand_name="gs25", category=category)[0]
+            seven_eleven_jumpos = crawl_gs25()
+            seven_eleven_jumpos = [Jumpo(**j, brand=brand) for j in seven_eleven_jumpos]
+            jumpos += seven_eleven_jumpos
+            print("got {} jumpos".format(len(seven_eleven_jumpos)))
+
 
         print("total {} jumpos crawled".format(len(jumpos)))
         objs = Jumpo.objects.bulk_create(jumpos)

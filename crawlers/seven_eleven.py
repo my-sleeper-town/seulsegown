@@ -10,13 +10,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
+from utils.utils import addr_to_lat_lng
 
 URL = 'https://www.7-eleven.co.kr/'
 
 def crawl_seven_eleven():
     '''
     서울에 있는 세븐일레븐 점포를 찾아 반환합니다.
-    반환: (점포이름, 점포주소)의 문자열 튜플을 담은 리스트
+    반환: [{'jumpo_name': 점포이름, 'street_address': 주소, 'latitude': 위도, 'longitude': 경도}]
     '''
     jumpos = []
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -61,10 +62,15 @@ def crawl_seven_eleven():
             WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, '//div[@class="list_stroe"]/ul/li/a/span')))
             jumpo_name = jumpo.find_element(By.XPATH, './span[1]').text.strip()
             address = jumpo.find_element(By.XPATH, './span[2]').text.strip()
+
+            lng_lat = addr_to_lat_lng(address)
+
             jumpos.append(
                 {
                     "jumpo_name": jumpo_name,
-                    "street_address": address
+                    "street_address": address,
+                    "latitude": lng_lat[0] if lng_lat else 0,
+                    "longitude": lng_lat[1] if lng_lat else 0,
                 }
             )
  

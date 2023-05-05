@@ -12,8 +12,6 @@ def result(request):
 
     # 사용자가 입력한 주소의 위도, 경도 쌍
     lnglat = addr_to_lat_lng(address)
-    print(lnglat)
-    print(address)
     
     # 지역
     area = [

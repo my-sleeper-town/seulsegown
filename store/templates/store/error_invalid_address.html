@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="index">
+    <header>
+        <h1>에러페이지</h1>
+        <p style="font-size: 23px;">
+            주소를 올바르게 입력해주세요. 
+        </p>
+        <br>
+        <p style="font-size: 19px;">
+            ( 주소 작성 예시 : 서울 중구 태평로 1가, 서울 용산구 효창원로 258 )
+        </p>
+
+    </header>
+    <main>
+        <form action="{% url 'index' %}" method="get" class="search-field">
+            <button type="submit">돌아가기</button>
+    </main>
+    <section>
+        {% load static %}
+        <img class="konbini" src="{% static 'images/konbini.png' %}"/>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+@font-face{
+    font-family: 'BMDOHYEON_ttf';
+    src: url("./assets/BMDOHYEON_ttf.ttf") format('woff');
+}
+
+.main{
+    background: #E7F5FF;
+    
+    width: 1124px;
+    height: 1557px;
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+}
+
+#score_text{
+    position: absolute;
+    width: 946px;
+    height: 90px;
+    left: 129px;
+    top: 64px;
+
+    font-family: 'BMDOHYEON_ttf';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 58px;
+    text-align: center;
+
+    color: #000000;
+}
+
+#score_result{
+    position: absolute;
+    width: 326px;
+    height: 80px;
+    left: 428px;
+    top: 141px;
+
+    font-family: 'BMDOHYEON_ttf';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 96px;
+    line-height: 116px;
+    text-align: center;
+
+    color: #000000;
+}
+
+#map{
+    position: absolute;
+    width: 582px;
+    height: 599px;
+    left: calc(50% - 582px/2);
+    top: calc(50% - 599px/2 - 196px);
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
+#info{
+    position: absolute;
+    width: 895px;
+    height: 312px;
+    left: 143px;
+    top: 930px;
+
+    font-family: 'BMDOHYEON_ttf';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 44px;
+
+    color: #000000;
+}
+
+#how_to_score_btn{
+    position: absolute;
+    width: 858px;
+    height: 109px;
+    left: 147px;
+    top: 1280px;
+
+    font-family: 'BMDOHYEON_ttf';
+    font-size: 28px;
+  }
+
+#visualization_btn {
+    position: absolute;
+    width: 858px;
+    height: 109px;
+    left: 147px;
+    top: 1420px;
+
+    font-family: 'BMDOHYEON_ttf';
+    font-size: 28px;
+}
+
+#how_to_score_btn:hover{
+    background-color: #17efef;
+    color: #000000;
+
+    font-size: 28px;
+    white-space: pre-line;
+}
+
+#how_to_score_btn:hover::before { 
+  content: "200m 내에 있는 편의점은 3점 씩\A\A 300m 내에 있는 편의점은 2점 씩\A\A 500m 내에 있는 편의점은 1점 씩 \A\A 총점이 10점 이상이면 모두 10점으로 책정됩니다"; /* 툴팁의 내용을 설정합니다. */
+
+  position: absolute;
+  top: -360px; 
+  left: 50%;
+  width: 825px;
+  transform: translateX(-50%);
+
+  background-color: #17efef;
+  color: #000000;
+  padding: 5px 10px;
+  border-radius: 50px;
+
+  font-size: 30px;
+  white-space: pre-line;
+}
+

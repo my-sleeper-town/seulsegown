@@ -1,16 +1,20 @@
-'''
+"""
 Retrieves the address and jumpo name of emart 24 stores in Seoul from emart24.co.kr.
 @returns - a list of dictionary of {jumpo_name, street_address,  latitude, longtitude}
-'''
+"""
+import time
 from selenium import webdriver
 from selenium.webdriver import ActionChains
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-import time
 from utils.utils import addr_to_lat_lng
 
 def crawl_emart_24():
+    '''
+    서울에 있는 이마트24 점포를 찾아 반환합니다.
+    반환: [{'jumpo_name': 점포이름, 'street_address': 주소, 'latitude': 위도, 'longitude': 경도}]
+    '''
     driver = webdriver.Chrome(service = Service(ChromeDriverManager().install()))
     driver.get('https://www.emart24.co.kr/store')
     driver.implicitly_wait(0.5)
@@ -39,9 +43,8 @@ def crawl_emart_24():
     while prev != tmp:  #다음 페이지 버튼 선택했음에도 페이지 변화 없으면 break
         try:
             prev = tmp
-            address_list = driver.find_elements(By.CLASS_NAME, 'place')
-            jumponame_list = driver.find_element(By.CLASS_NAME, 'searchResultList') \
-                                   .find_elements(By.CLASS_NAME, 'title')
+            address_list = driver.find_elements(By.CLASS_NAME, "place")
+            jumponame_list = driver.find_element(By.CLASS_NAME, "searchResultList").find_elements(By.CLASS_NAME, "title")
             time.sleep(1)
 
             for street_address, jumpo_name in zip(address_list, jumponame_list):
@@ -55,13 +58,13 @@ def crawl_emart_24():
                     print(f'Can not retrive latlng of {jumpo_name} from API')
 
                 loc_list.append(
-                    {
-                        'jumpo_name':jumpo_name.text,
-                        'street_address':street_address.text,
-                        'latitude': lat, # 위도 
-                        'longitude': lng  # 경도
-                    }
-                )
+                            {
+                                'jumpo_name':jumpo_name.text,
+                                'street_address':street_address.text,
+                                'latitude': lat, # 위도 
+                                'longitude': lng  # 경도
+                            }
+                            )
             ActionChains(driver).click(next_btn).perform()
             time.sleep(1)
 

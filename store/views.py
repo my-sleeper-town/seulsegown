@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.http import Http404
 from store.models import Jumpo
-from utils.utils import addr_to_lat_lng
+from utils.utils import addr_to_lat_lng, calculate_seulsegown_score
 import math
 
 def index(request):
@@ -41,11 +41,12 @@ def result(request):
             # position: 위도, 경도 쌍
             # jumpos: 사용자 근처의 점포 목록
             return render(request, 'store/result.html', {
-                'address': address,
-                'position': (lat, lng),
-                'jumpos': sorted(jumpos, key=lambda x: x['distance'])
-            })
+                    'address': address,
+                    'position': (lat, lng),
+                    'jumpos': sorted(jumpos, key=lambda x: x['distance']),
+                    'score': calculate_seulsegown_score(jumpos),
+                })
         else:
             raise Http404('현재는 서울특별시만 서비스를 제공하고 있습니다.')
     else:
-        raise Http404('주소를 반드시 입력해주셔야 합니다.')
+        raise Http404("주소를 반드시 입력해주셔야 합니다.")

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="index">
+    <header>
+        <h1>에러페이지</h1>
+        <p>
+            주소를 반드시 입력해주셔야 합니다.
+        </p>
+    </header>
+    <main>
+        <form action="{% url 'index' %}" method="get" class="search-field">
+            <button type="submit">돌아가기</button>
+    </main>
+    <section>
+        {% load static %}
+        <img class="konbini" src="{% static 'images/konbini.png' %}"/>
+    </section>
+</div>
+{% endblock %}

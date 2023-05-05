@@ -41,8 +41,8 @@ def result(request):
             # jumpos: 사용자 근처의 점포 목록
             return render(request, 'store/result.html', {'address': address, 'position': (lat, lng), 'jumpos': sorted(jumpos, key=lambda x: x['distance'])})
         else:
-            raise Http404('현재는 서울특별시만 서비스를 제공하고 있습니다.')
+            return render(request, 'store/error.html', {})
     else:
-        raise Http404("주소를 반드시 입력해주셔야 합니다.")
+        return render(request, 'store/error2.html', {})
 
 

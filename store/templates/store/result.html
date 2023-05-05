@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>슬세권-결과</title>
+</head>
+<body>
+    <p>입력하신 주소는 {{ address }}입니다.</p>
+    <p>현재 위치는 {{ position }}입니다.</p>
+    <p>슬세권 점수는 {{ score }}입니다.</p>
+
+    <ul>
+    {% for jumpo in jumpos %}
+    <li>
+        {{ jumpo.jumpo_name }} | {{ jumpo.distance }}m 떨어져 있습니다.
+    </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

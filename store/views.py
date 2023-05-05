@@ -3,6 +3,7 @@ from django.shortcuts import render
 from store.models import Jumpo
 from utils.utils import addr_to_lat_lng, calculate_seulsegown_score
 import math
+import json
 
 def index(request):
     return render(request, 'store/index.html', {})
@@ -59,8 +60,8 @@ def result(request):
         # jumpos: 사용자 근처의 점포 목록
         return render(request, 'store/result.html', {
                 'address': address,
-                'position': (lat, lng),
-                'jumpos': sorted(jumpos, key=lambda x: x['distance']),
+                'position': [lat, lng],
+                'jumpos': json.dumps(sorted(jumpos, key=lambda x: x['distance']), ensure_ascii=False),
                 'score': calculate_seulsegown_score(jumpos),
                 })
     # 서울이 아닌경우

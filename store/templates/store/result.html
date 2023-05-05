@@ -1,20 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>슬세권-결과</title>
-</head>
-<body>
-    <p>입력하신 주소는 {{ address }}입니다.</p>
-    <p>현재 위치는 {{ position }}입니다.</p>
-    <p>슬세권 점수는 {{ score }}입니다.</p>
+<html>
+  <head>
+    <meta charset="utf-8">
 
-    <ul>
-    {% for jumpo in jumpos %}
-    <li>
-        {{ jumpo.jumpo_name }} | {{ jumpo.distance }}m 떨어져 있습니다.
-    </li>
-    {% endfor %}
-    </ul>
-</body>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/result.css' %}" type= "text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    
+    <title>result_page</title>
+  </head>
+  <body>
+    <div class = "main">
+      <div>
+        <p id = "score_text"> 당신이 사는 지역의 슬세권 점수는</p>
+        <br>
+        <p id = "score_result">  </p>
+      </div>
+      <div id="map"></div>
+      <div id = "info">
+        <ul>
+          <li id = nearest-jumpo></li>
+          <br>
+          <li id = 200m-jumpo></li>
+          <br>
+          <li id = 300m-jumpo></li>
+          <br>
+          <li id = 500m-jumpo></li>
+      </ul>  
+      </div>
+      <div id="d-grid gap-2 col-6 mx-auto">
+        <button id = "how_to_score_btn" type="button" class="btn btn-outline-primary">슬세권 점수 산정기준을 보고싶다면?</button>
+        <button id = "visualization_btn" type="button" class="btn btn-outline-primary">서울 편의점 분포를 한눈에 보고싶다면?</button>
+      </div>
+      <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7158a6d3c833a4a06b2d950389f81&libraries=services"></script>
+      <script src="{% static 'js/script.js' %}"></script>
+      <script>
+        $( document ).ready(function() {
+          console.log( "ready!" );
+          const data = {
+            jumpos: {{ jumpos | safe }},
+            address: "{{ address }}",
+            position: {{ position }},
+            score: {{ score }},
+          }
+          setMap(data.position, data.jumpos)
+          renderPage(data)
+        });
+      </script>
+    </div>      
+  </body>
 </html>

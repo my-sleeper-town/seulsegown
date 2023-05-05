@@ -1,10 +1,14 @@
+"""Utils module
+
+This module provide functions to calculate distance, get latlng range, etc.
+"""
+
 import math
 import requests
-from urllib.parse import urlparse
 import json
 import os
 
-# 터미널에서 export로 키를 저장하시면 됩니다. 
+# 터미널에서 export로 키를 저장하시면 됩니다.
 token = os.getenv('KAKAO_TOKEN')
 
 EARTH_RADIUS = 6371  # 지구 반지름(km)
@@ -89,15 +93,14 @@ def get_distance(lat1, lng1, lat2, lng2):
 
 # 주소를 받아 위도 경도로 변환하기
 def addr_to_lat_lng(addr):
-    url = 'https://dapi.kakao.com/v2/local/search/address.json?query={address}'.format(address=addr)
-    headers = {"Authorization": "KakaoAK " + token} # token에 kakao api 키를 저장하시면 됩니다. 
-    
+    url = f'https://dapi.kakao.com/v2/local/search/address.json?query={addr}'
+    headers = {'Authorization': 'KakaoAK ' + token} # token에 kakao api 키를 저장하시면 됩니다
+
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=5)
         result = json.loads(response.text)
         match_first = result['documents'][0]['address']
         return float(match_first['x']), float(match_first['y'])
-    
+
     except (requests.exceptions.RequestException, TypeError, ValueError, KeyError, IndexError) as e:
-        print(f"Error occurred: {e} while fetching address: {addr}")
-        pass 
+        print(f'Error occurred: {e} while fetching address: {addr}')

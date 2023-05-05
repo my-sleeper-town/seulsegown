@@ -9,6 +9,36 @@ token = os.getenv('KAKAO_TOKEN')
 
 EARTH_RADIUS = 6371  # 지구 반지름(km)
 
+def calculate_seulsegown_score(jumpos):
+    '''
+    dict로 구성된 리스트를 받아 슬세권 점수를 계산합니다.
+
+    세부적인 계산 방법은 아래와 같습니다:
+
+        - 리스트의 편의시설을 아래의 방법대로 점수를 매겨서 합산합니다.
+            - 200m 내에 있는 편의시설은 3점
+            - 300m 내에 있는 편의시설은 2점
+            - 400m 내에 있는 편의시설은 1점
+        - 만점은 10점으로 10점을 넘기지 않습니다.
+
+    Args:
+        jumpos (dict): {distance: 현재 위치와의 거리(m단위)}
+
+    Returns:
+        int: 0 이상 10 이하의 점수
+    '''
+
+    score = 0
+    for jumpo in jumpos:
+        if jumpo['distance'] <= 200:
+            score += 3
+        elif jumpo['distance'] <= 300:
+            score += 2
+        elif jumpo['distance'] <= 400:
+            score += 1
+    score = score if score < 10 else 10
+    return score
+
 def get_latlng_range(latlng, distance):
     """
     주어진 위도, 경도를 기준으로 특정 거리만큼 떨어져있는 반경을 반환합니다.

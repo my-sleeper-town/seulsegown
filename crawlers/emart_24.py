@@ -43,8 +43,9 @@ def crawl_emart_24():
     while prev != tmp:  #다음 페이지 버튼 선택했음에도 페이지 변화 없으면 break
         try:
             prev = tmp
-            address_list = driver.find_elements(By.CLASS_NAME, "place")
-            jumponame_list = driver.find_element(By.CLASS_NAME, "searchResultList").find_elements(By.CLASS_NAME, "title")
+            address_list = driver.find_elements(By.CLASS_NAME, 'place')
+            jumponame_list = driver.find_element(By.CLASS_NAME, 'searchResultList')\
+                                   .find_elements(By.CLASS_NAME, 'title')
             time.sleep(1)
 
             for street_address, jumpo_name in zip(address_list, jumponame_list):

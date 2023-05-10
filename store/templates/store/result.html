@@ -34,7 +34,7 @@
         <button id = "how_to_score_btn" type="button" class="btn btn-outline-primary">슬세권 점수 산정기준을 보고싶다면?</button>
         <button id = "visualization_btn" type="button" class="btn btn-outline-primary">서울 편의점 분포를 한눈에 보고싶다면?</button>
       </div>
-      <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a1a7158a6d3c833a4a06b2d950389f81&libraries=services"></script>
+      <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{ KAKAO_JS_KEY }}&libraries=services"></script>
       <script src="{% static 'js/script.js' %}"></script>
       <script>
         $( document ).ready(function() {

@@ -1,5 +1,6 @@
 """store view module"""
 from django.shortcuts import render
+from django.conf import settings
 from store.models import Jumpo
 from utils.utils import addr_to_lat_lng, calculate_seulsegown_score
 import math
@@ -59,11 +60,12 @@ def result(request):
         # position: 위도, 경도 쌍
         # jumpos: 사용자 근처의 점포 목록
         return render(request, 'store/result.html', {
-                'address': address,
-                'position': [lat, lng],
-                'jumpos': json.dumps(sorted(jumpos, key=lambda x: x['distance']), ensure_ascii=False),
-                'score': calculate_seulsegown_score(jumpos),
-                })
+            'address': address,
+            'position': [lat, lng],
+            'jumpos': json.dumps(sorted(jumpos, key=lambda x: x['distance']), ensure_ascii=False),
+            'score': calculate_seulsegown_score(jumpos),
+            'KAKAO_JS_KEY': settings.KAKAO_JS_KEY,
+        })
     # 서울이 아닌경우
     else:
         # 입력이 빈칸인 경우

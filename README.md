@@ -54,7 +54,8 @@
 
 6. 발급받은 API 키를 환경변수로 저장합니다.
    ```sh
-   export KAKAO_TOKEN="발급받은 키"
+   export KAKAO_REST_KEY="발급받은 키"
+   export KAKAO_JS_KEY="발급받은 키"
    ```
 7. django mangement 명령어를 통해 편의점 데이터를 다운받습니다. 
    ```sh

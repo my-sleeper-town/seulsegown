@@ -1,10 +1,8 @@
+'''tests for utils'''
 from django.test import TestCase
 from unittest.mock import patch
 from utils.utils import get_latlng_range, get_distance, addr_to_lat_lng, calculate_seulsegown_score
 import json
-import math
-import requests
-
 
 class CalculateScoreTest(TestCase):
     def test_calculate_score(self):
@@ -68,6 +66,7 @@ class GetDistanceTest(TestCase):
         self.assertAlmostEqual(result_distance, expected_distance, places=2)
 
 
+# pylint: disable=C0115
 class AddrToLatLngTestCase(TestCase):
     def setUp(self):
         self.mock_result = {

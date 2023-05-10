@@ -71,6 +71,26 @@
    python manage.py runserver
    ```
 
+### 도커 이미지 생성하기
+
+다음의 명령어로 도커 이미지를 생성할 수 있습니다.
+
+```sh
+$ docker build --platform linux/amd64 -t seulsegown .
+```
+
+아래의 명령어로 빌드한 이미지를 실행할 수 있습니다.
+
+```sh
+$ docker run -d -p 8000:80 \
+-e DEBUG=False \
+-e KAKAO_REST_KEY=[kakao_rest_key] \
+-e KAKAO_JS_KEY=[kakao_js_key] \
+-e SECRET_KEY=[set_secret_key] \
+-e ALLOWED_HOSTS=.localhost,127.0.0.1 \
+--name seulsegown \
+seulsegown
+```
 
 <br></br>
 

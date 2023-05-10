@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,12 +25,12 @@ KAKAO_JS_KEY = os.getenv('KAKAO_JS_KEY')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tk5mbmi+8h&^mif@#quz!@s=1_mz#+mxb8*drn!u!lxk@c&27i'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(',') if not DEBUG else []
 
 
 # Application definition
@@ -123,7 +124,34 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = '/var/www/seulsegown/static'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+   'version': 1,
+   'disable_existing_loggers': False,
+   'formatters': {
+       'verbose': {
+           'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+       },
+   },
+   'handlers': {
+       'console': {
+           'level': 'INFO',
+           'class': 'logging.StreamHandler',
+           'stream': sys.stdout,
+           'formatter': 'verbose'
+       },
+   },
+   'loggers': {
+       '': {
+           'handlers': ['console'],
+           'level': 'INFO',
+           'propagate': True,
+       },
+   },
+}

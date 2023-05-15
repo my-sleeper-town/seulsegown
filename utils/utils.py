@@ -6,10 +6,10 @@ This module provide functions to calculate distance, get latlng range, etc.
 import math
 import requests
 import json
-import os
+from django.conf import settings
 
 # 터미널에서 export로 키를 저장하시면 됩니다.
-token = os.getenv('KAKAO_TOKEN')
+token = settings.KAKAO_REST_KEY
 
 EARTH_RADIUS = 6371  # 지구 반지름(km)
 

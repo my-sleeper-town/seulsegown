@@ -50,6 +50,7 @@ class Command(BaseCommand):
         parser.add_argument('--brand', type=str, help='specify a brand to crawl')
         parser.add_argument('--all', action='store_true', help='crawl all brands')
 
+    # pylint: disable=W0613
     def handle(self, *args, **options):
         '''
         manage.py로 명령어를 실행할 시에 호출되는 콜백 함수입니다.
